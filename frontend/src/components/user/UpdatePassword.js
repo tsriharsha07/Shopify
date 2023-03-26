@@ -1,25 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { clearErrors, updateProfile, loadUser } from '../../actions/userActions';
+import { clearErrors, loadUser, updatePassword } from '../../actions/userActions';
 import { useNavigate } from 'react-router-dom'
 import MetaData from '../layouts/MetaData'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { UPDATE_PROFILE_RESET } from '../../constsants/userConstants';
+import { UPDATE_PASSWORD_RESET } from '../../constsants/userConstants';
 
 
 
-const UpdateProfile = () => {
-
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-
-
+const UpdatePassword = () => {
+    const [oldPassword, setOldPassword] = useState();
+    const [password, setPassword] = useState('')
     const dispatch = useDispatch()
     const { user, } = useSelector(state => state.auth)
     const { isUpdated, error, loading } = useSelector(state => state.user)
     const navigate = useNavigate()
-    const notify = () => toast.error('Update Success', {
+    const notify = () => toast.error('Passowrd Update Success', {
         position: "top-right",
         autoClose: false,
         hideProgressBar: false,
@@ -31,13 +28,8 @@ const UpdateProfile = () => {
     });
 
 
-    useEffect(() => {
-        if (user) {
-            setName(user.name)
-            setEmail(user.email)
 
-            
-        }
+    useEffect(() => {
         if (error) {
 
             dispatch(clearErrors)
@@ -47,26 +39,24 @@ const UpdateProfile = () => {
             dispatch(loadUser)
             navigate('/me')
             dispatch({
-                type:UPDATE_PROFILE_RESET
+                type: UPDATE_PASSWORD_RESET
             })
         }
-    }, [dispatch, user,isUpdated, navigate, error])
+    }, [dispatch, isUpdated, navigate, error])
 
     const submitHandler = (e) => {
         e.preventDefault();
         const formData = new FormData();
-        formData.set('name', name)
-        formData.set('email', email)
+        formData.set('oldPassword', oldPassword)
+        formData.set('password', password)
 
 
-        dispatch(updateProfile(formData))
+        dispatch(updatePassword(formData))
     }
-    
     return (
-        <div>
-            <div className="row wrapper">
-                    <MetaData title={'Update Profile'}/>
-                    <ToastContainer
+        <>
+            <MetaData title="Update Password" />
+            <ToastContainer
                         position="top-right"
                         autoClose={false}
                         hideProgressBar={false}
@@ -78,41 +68,41 @@ const UpdateProfile = () => {
                         pauseOnHover
                         theme="colored"
                     />
+            <div className="row wrapper">
                 <div className="col-10 col-lg-5">
-                    <form className="shadow-lg" onSubmit={submitHandler} encType='multipart/form-data'>
-                        <h1 className="mt-2 mb-5">Update Profile</h1>
-
+                    <form className="shadow-lg" onSubmit={submitHandler}>
+                        <h1 className="mt-2 mb-5">Update Password</h1>
                         <div className="form-group">
-                            <label htmlFor="email_field">Name</label>
+                            <label htmlFor="old_password_field">Old Password</label>
                             <input
-                                type="name"
-                                id="name_field"
+                                type="password"
+                                id="old_password_field"
                                 className="form-control"
-                                name='name'
-                                value={name}
-                                onChange={(e)=>setName(e.target.value)}
+                                name="oldPassword"
+                                value={oldPassword}
+                                onChange={(e) => setOldPassword(e.target.value)}
                             />
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="email_field">Email</label>
+                            <label htmlFor="new_password_field">New Password</label>
                             <input
-                                type="email"
-                                id="email_field"
+                                type="password"
+                                id="new_password_field"
                                 className="form-control"
-                                name='email'
-                                value={email}
-                                onChange={(e)=>setEmail(e.target.value)}
+                                name="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                             />
                         </div>
 
-                        <button type="submit" className="btn update-btn btn-block mt-4 mb-3" 
-                        disabled={loading?true:false}>Update</button>
+                        <button type="submit" className="btn update-btn btn-block mt-4 mb-3"
+                        disabled={loading?true:false}>Update Password</button>
                     </form>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 
-export default UpdateProfile
+export default UpdatePassword
