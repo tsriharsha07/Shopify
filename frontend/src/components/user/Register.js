@@ -7,12 +7,12 @@ import MetaData from '../layouts/MetaData'
 const Register = () => {
     const [user, setUser] = useState({
         name: '',
-        email: '',
+        email: '',  
         password: ''
     })
 
     const { email, name, password } = user
-
+    console.log(email);
     
     const dispatch = useDispatch()
     const { isAuthenticated, error, loading } = useSelector(state => state.auth)
