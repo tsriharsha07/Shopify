@@ -12,6 +12,7 @@ import store from './store';
 import { loadUser } from './actions/userActions';
 import Profile from './components/user/Profile';
 import ProtectedRoute from './components/route/ProtectedRoute';
+import UpdateProfile from './components/user/UpdateProfile';
 
 function App() {
   useEffect(() => {
@@ -30,11 +31,8 @@ function App() {
             <Route path="/product/:id" element={<ProductDetails />} exact />
             <Route path="/login" element={<Login />} exact />
             <Route path="/register" element={<Register />} exact />
-            <Route path="/me" element={
-            <ProtectedRoute isAdmin={true}>
-              <Profile />
-            </ProtectedRoute>} exact />
-            
+            <Route path="/me" element={<ProtectedRoute isAdmin={false}><Profile /></ProtectedRoute>} exact />
+            <Route path="/me/update" element={<ProtectedRoute isAdmin={false}><UpdateProfile /></ProtectedRoute>} exact />
             
           </Routes>
         </div>

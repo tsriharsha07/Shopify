@@ -14,23 +14,14 @@ const Login = () => {
     const [password, setPassword] = useState('')
     const { isAuthenticated, error, loading } = useSelector(state => state.auth)
     const navigate = useNavigate()
-    const notify = () => toast.error('Login first to access this resource', {
-        position: "bottom-center",
-        autoClose: 4989,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-    });
+    
 
     useEffect(() => {
         if (isAuthenticated) {
             navigate('/');
         }
         if (error) {
-            notify();
+            
             dispatch(clearErrors)
         }
     }, [dispatch, isAuthenticated, navigate, error])
@@ -45,18 +36,7 @@ const Login = () => {
             {loading ? <Loader /> :
                 <>
                     <MetaData title={'Login'} />
-                    <ToastContainer
-                        position="bottom-center"
-                        autoClose={4989}
-                        hideProgressBar={false}
-                        newestOnTop={false}
-                        closeOnClick
-                        rtl={false}
-                        pauseOnFocusLoss
-                        draggable
-                        pauseOnHover
-                        theme="colored"
-                    />
+                    
                     <div className="row wrapper">
                         <div className="col-10 col-lg-5">
                             <form className="shadow-lg" onSubmit={submitHandler}>

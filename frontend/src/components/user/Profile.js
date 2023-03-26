@@ -1,11 +1,17 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../layouts/Loader'
 import MetaData from '../layouts/MetaData'
 import { Link } from 'react-router-dom'
+import { loadUser } from '../../actions/userActions'
 
 const Profile = () => {
+    const dispatch=useDispatch()
+    useEffect(()=>{
+        dispatch(loadUser())
+    },[dispatch])
     const { user, loading } = useSelector(state => state.auth)
+    
     return (
         <>
             {loading ? (

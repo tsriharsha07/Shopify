@@ -16,12 +16,9 @@ const ProtectedRoute = ({isAdmin,children}) => {
         return <Loader/>
     }
     if(!loading && isAuthenticated){
-        if(isAdmin===true && user.role!=='admin'){
-            
-            return <Navigate to='/'/>
+        if(isAdmin===true && user.role!=='admin'){ 
+            return <Navigate to='/me'/>
         }
-        
-        console.log('hii');
         return children;
     }
     else{
