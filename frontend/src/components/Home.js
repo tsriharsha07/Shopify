@@ -10,9 +10,7 @@ import { getProducts } from '../actions/productActions'
 import Product from './product/Product'
 import Loader from './layouts/Loader'
 import { useParams } from 'react-router-dom'
-
-
-// import { useAlert } from 'react-alert'
+import { useAlert } from 'react-alert'
 
 const createSliderWithTooltip = Slider.createSliderWithTooltip;
 const Range = createSliderWithTooltip(Slider.Range)
@@ -41,16 +39,18 @@ const Home = () => {
     ]
  
     const dispatch = useDispatch();
-    // const alert=useAlert();
+    const alert=useAlert();
+    
     const { loading, products, error, productsCount, resPerPage,filterProductsCount } = useSelector(state => state.products)
     const keyword = params.keyword
 
     useEffect(() => {
-        // if(error) {
-        //     return alert.error(error)
-        // }
+        if(error) {
+            console.log(error);
+            return alert.error(error)
+        }
         dispatch(getProducts(keyword, currentPage, price,category,rating))
-    }, [dispatch, currentPage, keyword, price,category,rating]);
+    }, [dispatch, currentPage, keyword, price,category,rating,alert,error]);
 
     function setCurrentPageNo(pageNumber) {
         setCurrentPage(pageNumber);

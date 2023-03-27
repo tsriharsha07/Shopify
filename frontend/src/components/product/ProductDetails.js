@@ -1,15 +1,17 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Loader from '../layouts/Loader';
 import MetaData from '../layouts/MetaData';
-
+import { addItemToCart } from '../../actions/cartActions';
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom';
 import { clearErrors, getProductDetails } from '../../actions/productActions'
+import { useAlert } from 'react-alert'
 
 const ProductDetails = () => {
+    const [quantity,setQuantity]=useState(1)
     const dispatch = useDispatch();
     const params = useParams()
-
+    const alert=useAlert();
     const { loading, error, product } = useSelector((state) => state.productDetails)
     useEffect(() => {
         dispatch(getProductDetails(params.id))
@@ -17,7 +19,31 @@ const ProductDetails = () => {
             dispatch(clearErrors)
         }
     }, [dispatch, params.id, error])
+    
+    const addToCart =()=>{
+        dispatch(addItemToCart(params.id, quantity))
+        alert.success('Item Added to Cart')
+    }
 
+    const increaseQty=()=>{
+        const count=document.querySelector('.count1')
+        
+        if(count.valueAsNumber >= product.stock){
+            return ;
+        }
+        const qty=count.valueAsNumber+1;
+        setQuantity(qty)
+    }
+
+    const decreaseQty=()=>{
+        const count=document.querySelector('.count1')
+        
+        if(count.valueAsNumber <= 1){
+            return ;
+        }
+        const qty=count.valueAsNumber-1;
+        setQuantity(qty)
+    }
     return (
         <>
             {loading ? <Loader /> : (
@@ -26,7 +52,7 @@ const ProductDetails = () => {
                     <div className="container container-fluid">
                         <div className="row f-flex justify-content-around">
                             <div className="col-12 col-lg-5 img-fluid" id="product_image">
-                                <img src="https://i5.walmartimages.com/asr/1223a935-2a61-480a-95a1-21904ff8986c_1.17fa3d7870e3d9b1248da7b1144787f5.jpeg?odnWidth=undefined&odnHeight=undefined&odnBg=ffffff" alt="sdf" height="500" width="500" />
+                                <img src={product && product.images && product.images[0].url}alt="sdf" height="500" width="500" />
                             </div>
 
                             <div className="col-12 col-lg-5 mt-5">
@@ -44,13 +70,13 @@ const ProductDetails = () => {
 
                                 <p id="product_price">${product.price}</p>
                                 <div className="stockCounter d-inline">
-                                    <span className="btn btn-danger minus">-</span>
+                                    <span className="btn btn-danger minus" onClick={decreaseQty}>-</span>
 
-                                    <input type="number" className="form-control count d-inline" value="1" readOnly />
+                                    <input type="number" className="form-control count1 d-inline" value={quantity} readOnly />
 
-                                    <span className="btn btn-primary plus">+</span>
+                                    <span className="btn btn-primary plus" onClick={increaseQty}>+</span>
                                 </div>
-                                <button type="button" id="cart_btn" className="btn btn-primary d-inline ml-4">Add to Cart</button>
+                                <button type="button" id="cart_btn" className="btn btn-primary d-inline ml-4" disabled={product.stock === 0} onClick={addToCart}>Add to Cart</button>
 
                                 <hr />
 

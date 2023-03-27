@@ -6,6 +6,7 @@ import Loader from '../layouts/Loader'
 import MetaData from '../layouts/MetaData'
 import { Link } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
+import { useAlert } from 'react-alert';
 
 const Login = () => {
     const dispatch = useDispatch()
@@ -13,17 +14,18 @@ const Login = () => {
     const [password, setPassword] = useState('')
     const { isAuthenticated, error, loading } = useSelector(state => state.auth)
     const navigate = useNavigate()
-    
-
+    const alert=useAlert()
+   
     useEffect(() => {
         if (isAuthenticated) {
             navigate('/');
         }
         if (error) {
-            
+            alert.error(error.message)
             dispatch(clearErrors)
         }
-    }, [dispatch, isAuthenticated, navigate, error])
+
+    }, [dispatch, isAuthenticated, navigate, error,alert])
 
     const submitHandler = (e) => {
         e.preventDefault()
