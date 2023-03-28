@@ -9,7 +9,7 @@ const connectDatabase = ()=>{
     
     mongoose.connect("mongodb://localhost:27017/shopit",({
             useNewUrlParser: true,
-            useUnifiedTopology: true
+            useUnifiedTopology: true 
     })).then(con =>{
         console.log(`Mongodb Database connected with HOST: ${con.connection.host}`)
     })

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { clearErrors, login } from '../../actions/userActions';
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import Loader from '../layouts/Loader'
 import MetaData from '../layouts/MetaData'
 import { Link } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAlert } from 'react-alert';
+
 
 const Login = () => {
     const dispatch = useDispatch()
@@ -15,17 +16,18 @@ const Login = () => {
     const { isAuthenticated, error, loading } = useSelector(state => state.auth)
     const navigate = useNavigate()
     const alert=useAlert()
-   
+    const location=useLocation();
+    const redirect=location.search ? `/${location.search.split('=')[1]}`:'/'
     useEffect(() => {
         if (isAuthenticated) {
-            navigate('/');
+            navigate(redirect);
         }
         if (error) {
             alert.error(error.message)
             dispatch(clearErrors)
         }
 
-    }, [dispatch, isAuthenticated, navigate, error,alert])
+    }, [dispatch, redirect,isAuthenticated, navigate, error,alert])
 
     const submitHandler = (e) => {
         e.preventDefault()
@@ -67,9 +69,10 @@ const Login = () => {
                                 <Link to="/password/forgot" className="float-right mb-4">Forgot Password?</Link>
 
                                 <button
-                                    id="login_button"
+                                    
                                     type="submit"
-                                    className="btn btn-block py-3"
+                                    className="btn btn-block py-3 login"
+                                    
                                 >
                                     LOGIN
                                 </button>

@@ -27,7 +27,7 @@ body {
 }
 
 nav {
-  background-color: #232f3e;
+  background-color: #1a6981;
   padding: 1rem 1rem;
 }
 
@@ -38,6 +38,11 @@ nav {
 .input-group {
   width: 90%;
   margin-right: 35%;
+}
+
+.login{
+  padding: 0.4rem 1.8rem;
+  background-color: blue;
 }
 
 #search_field {
@@ -307,8 +312,8 @@ footer {
 }
 
 .wrapper form .btn {
-  background-color: #fa9c23;
-  border-color: #fa9c23;
+  background-color: #1eafaf;
+  border-color: #1eafaf;
   color: white;
   margin-top: 2.5rem;
 }

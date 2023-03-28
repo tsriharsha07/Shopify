@@ -47,7 +47,7 @@ const Home = () => {
     useEffect(() => {
         if(error) {
             console.log(error);
-            return alert.error(error)
+            alert.error(error)
         }
         dispatch(getProducts(keyword, currentPage, price,category,rating))
     }, [dispatch, currentPage, keyword, price,category,rating,alert,error]);
@@ -75,8 +75,8 @@ const Home = () => {
                                                 1: `$1`,
                                                 1000: `$1000`
                                             }}
-                                            minValue={1}
-                                            maxValue={1000}
+                                            min={1}
+                                            max={1000}
                                             defaultValue={[1, 1000]}
                                             tipFormatter={value => `$${value}`}
                                             tipProps={{
