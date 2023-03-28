@@ -22,9 +22,7 @@ const Header = () => {
         dispatch(logout())
     }
     const isAd=user&& user.role && user.role==='admin'
-    console.log(isAd);
-    const avat=user && user.name && user.name.substring(0,1)
-    console.log(avat);
+    //const avat=user && user.name && user.name.substring(0,1)
     return (
         <Fragment>
             <nav className="navbar row">
@@ -63,7 +61,10 @@ const Header = () => {
 
                                     <Link className="dropdown-item " to='/orders/me'><ShoppingBasketIcon sx={{marginRight:1}}/>Orders</Link>
                                 ) : (
+                                    <>
+                                    <Link className="dropdown-item " to='/orders/me'><ShoppingBasketIcon sx={{marginRight:1}}/>Orders</Link>
                                     <Link className="dropdown-item " to='/dashboard'><DashboardIcon sx={{marginRight:1}}/>Dashboard</Link>
+                                    </>
                                 )}
                                 <Link className="dropdown-item " to='/me'><AccountCircleIcon sx={{marginRight:1}}/>Profile</Link>
 

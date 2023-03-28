@@ -5,7 +5,7 @@ import CheckoutSteps from '../cart/CheckoutSteps'
 import { Link, useNavigate } from 'react-router-dom'
 
 const ConfirmOrder = () => {
-    const { cartItems, shippingInfo } = useSelector(state => state.cart)
+    const { cartItems, shipping } = useSelector(state => state.cart)
     const { user } = useSelector(state => state.auth)
     const navigate=useNavigate()
     //Calculate Order Prices
@@ -24,6 +24,7 @@ const ConfirmOrder = () => {
         sessionStorage.setItem('orderInfo', JSON.stringify(data))
         navigate('/payment')
     }
+    console.log(shipping);
 
     return (
         <>
@@ -34,9 +35,9 @@ const ConfirmOrder = () => {
 
                     <h4 className="mb-3">Shipping Info</h4>
                     <p><b>Name:</b> {user.name}</p>
-                    <p><b>Phone:</b> {shippingInfo.phoneNo}</p>
-                    <p className="mb-4"><b>Address:</b>{`${shippingInfo.address}, ${shippingInfo.city},${shippingInfo.postalCode}
-                ,${shippingInfo.country}`}</p>
+                    <p><b>Phone:</b> {shipping.phoneNo}</p>
+                    <p className="mb-4"><b>Address:</b>{`${shipping.address}, ${shipping.city},${shipping.postalCode}
+                ,${shipping.country}`}</p>
 
                     <hr />
                     <h4 className="mt-4">Your Cart Items:</h4>
