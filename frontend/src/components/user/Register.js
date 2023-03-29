@@ -46,7 +46,7 @@ const Register = () => {
         
     }
     return (
-        <>
+        <div className="container container-fluid">
             <MetaData title={'Register User'} />
             <div className="row wrapper">
                 <div className="col-10 col-lg-5">
@@ -101,7 +101,7 @@ const Register = () => {
                     </form>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

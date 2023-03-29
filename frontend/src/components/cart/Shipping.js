@@ -28,7 +28,7 @@ const Shipping = () => {
     }
 
     return (
-        <>
+        <div className="container container-fluid">
 
             <MetaData title='Shipping Info' />
             <CheckoutSteps shipping />
@@ -114,7 +114,7 @@ const Shipping = () => {
                     </form>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

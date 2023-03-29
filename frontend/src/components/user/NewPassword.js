@@ -44,7 +44,7 @@ const NewPassword = () => {
         dispatch(resetPassword(params.token, formData))
     }
     return (
-        <>
+        <div className="container container-fluid">
             <MetaData title="Reset Password" />
             <ToastContainer
                 position="top-right"
@@ -96,7 +96,7 @@ const NewPassword = () => {
                 </form>
             </div>
         </div>
-        </>
+        </div>
     )
 }
 

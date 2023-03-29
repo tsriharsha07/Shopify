@@ -10,7 +10,7 @@ const Profile = () => {
     const { user, loading } = useSelector(state => state.auth)
     
     return (
-        <>
+        <div className="container container-fluid">
             {loading ? (
                 <Loader />
             ) : (
@@ -54,7 +54,7 @@ const Profile = () => {
                     </div>
                 </>
             )}
-        </>
+        </div>
     )
 }
 

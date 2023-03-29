@@ -60,7 +60,7 @@ const Home = () => {
         count=filterProductsCount;
     }
     return (
-        <>
+        <div className="container container-fluid">
             {loading ? <Loader /> : <>
                 <MetaData title={'Buy Best Products Online'} />
                 <h1 id="products_heading">Latest Products</h1>
@@ -167,7 +167,7 @@ const Home = () => {
 
             </>}
 
-        </>
+        </div>
     )
 }
 

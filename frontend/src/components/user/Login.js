@@ -23,7 +23,6 @@ const Login = () => {
             navigate(redirect);
         }
         if (error) {
-            alert.error(error.message)
             dispatch(clearErrors)
         }
 
@@ -34,7 +33,7 @@ const Login = () => {
         dispatch(login(email, password))
     }
     return (
-        <>
+        <div className="container container-fluid">
 
             {loading ? <Loader /> :
                 <>
@@ -82,7 +81,7 @@ const Login = () => {
                         </div>
                     </div>
                 </>}
-        </>
+        </div>
     )
 }
 

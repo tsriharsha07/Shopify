@@ -13,6 +13,7 @@ const ListOrders = () => {
     const dispatch=useDispatch();
     const {loading,error,orders}=useSelector(state=>state.myOrders)
     
+    
     useEffect(()=>{
         
         dispatch(myOrders())
@@ -72,7 +73,7 @@ const ListOrders = () => {
 
 
   return (
-    <>
+    <div className="container container-fluid">
       <MetaData title={'My Orders'}/>
       <h1 className='mt-5'>My Orders</h1>
       {loading?(<Loader/>):(
@@ -86,7 +87,7 @@ const ListOrders = () => {
             />
         </>
       )}
-    </>
+    </div>
   )
 }
 

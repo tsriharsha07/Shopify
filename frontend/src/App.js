@@ -24,7 +24,11 @@ import { Elements } from '@stripe/react-stripe-js'
 import {loadStripe} from '@stripe/stripe-js'
 import OrderSuccess from './components/cart/OrderSuccess';
 import ListOrders from './components/order/ListOrders'
-
+import OrderDetails from './components/order/OrderDetails';
+import Dashboard from './components/admin/Dashboard';
+import ProductsList from './components/admin/ProductsList';
+import NewProduct from './components/admin/NewProduct';
+import UpdateProduct from './components/admin/UpdateProduct'
 
 function App() {
   const [stripeApiKey,setStripeApiKey]=useState('')
@@ -40,9 +44,11 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <Header />
-        <div className="container container-fluid">
-          <Routes>
+      <Header />
+      <Routes>
+        
+        
+          
             <Route path="/" element={<Home />} />
             <Route path="/search/:keyword" element={<Home />} exact />
             <Route path="/product/:id" element={<ProductDetails />} exact />
@@ -55,6 +61,7 @@ function App() {
             <Route path="/order/confirm" element={<ProtectedRoute isAdmin={false}><ConfirmOrder /></ProtectedRoute>} exact />
             <Route path="/success" element={<ProtectedRoute isAdmin={false}><OrderSuccess /></ProtectedRoute>} exact />
             <Route path="/orders/me" element={<ProtectedRoute isAdmin={false}><ListOrders /></ProtectedRoute>} exact />
+            <Route path="/order/:id" element={<ProtectedRoute isAdmin={false}><OrderDetails /></ProtectedRoute>} exact />
             <Route path="/password/forgot" element={<ForgotPassword/>} exact />
             <Route path="/cart" element={<Cart/>} exact/>
             <Route path="/password/reset/:token" element={<NewPassword/>} exact />
@@ -64,10 +71,15 @@ function App() {
                 <Elements stripe={loadStripe(stripeApiKey)}>
                   <Payment /></Elements></ProtectedRoute>} exact/>
               }
-          </Routes>
-        </div>
+          
+          <Route path="/admin/products" element={<ProtectedRoute isAdmin={true}><ProductsList /></ProtectedRoute>} exact />
+          <Route path="/admin/product/:id" element={<ProtectedRoute isAdmin={true}><UpdateProduct /></ProtectedRoute>} exact />
+          <Route path="/admin/product" element={<ProtectedRoute isAdmin={true}><NewProduct /></ProtectedRoute>} exact />
+        <Route path="/dashboard" element={<ProtectedRoute isAdmin={true}><Dashboard /></ProtectedRoute>} exact />
+        </Routes> 
         <Footer />
       </div>
+      
     </BrowserRouter>
   );
 }

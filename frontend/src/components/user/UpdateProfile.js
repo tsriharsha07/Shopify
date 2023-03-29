@@ -63,7 +63,7 @@ const UpdateProfile = () => {
     }
     
     return (
-        <div>
+        <div className="container container-fluid">
             <div className="row wrapper">
                     <MetaData title={'Update Profile'}/>
                     <ToastContainer

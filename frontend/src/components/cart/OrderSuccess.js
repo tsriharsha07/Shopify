@@ -4,7 +4,7 @@ import MetaData from '../layouts/MetaData'
 
 const OrderSuccess = () => {
   return (
-    <>
+    <div className="container container-fluid">
       <MetaData title={'Order Success'}/>
       <div className="row justify-content-center">
             <div className="col-6 mt-5 text-center">
@@ -16,7 +16,7 @@ const OrderSuccess = () => {
             </div>
 
         </div>
-    </>
+    </div>
   )
 }
 

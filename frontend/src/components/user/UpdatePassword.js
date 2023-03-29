@@ -54,7 +54,7 @@ const UpdatePassword = () => {
         dispatch(updatePassword(formData))
     }
     return (
-        <>
+        <div className="container container-fluid">
             <MetaData title="Update Password" />
             <ToastContainer
                         position="top-right"
@@ -101,7 +101,7 @@ const UpdatePassword = () => {
                     </form>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

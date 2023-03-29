@@ -110,7 +110,7 @@ const Payment = () => {
         }
     }
   return (
-    <>
+    <div className="container container-fluid">
       <MetaData title={'Payment'}/>
       <CheckoutSteps shipping confirmOrder payment/>
       <div className="row wrapper" onSubmit={submitHandler}>
@@ -163,7 +163,7 @@ const Payment = () => {
 			  </div>
         </div>
       
-    </>
+    </div>
   )
 }
 

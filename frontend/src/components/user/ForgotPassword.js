@@ -41,7 +41,7 @@ const ForgotPassword = () => {
         dispatch(forgotPassword(formData))
     }
     return (
-        <>
+        <div className="container container-fluid">
             <div className="row wrapper">
                 <MetaData title="Forgot Password" />
                 <ToastContainer
@@ -81,7 +81,7 @@ const ForgotPassword = () => {
                     </form>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

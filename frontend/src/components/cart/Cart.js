@@ -36,7 +36,7 @@ const Cart = () => {
     }
     
     return (
-        <>
+        <div className="container container-fluid">
             {
                 cartItems && cartItems.length === 0 ? (
                     <h2 className='mt-5'>You Cart is Empty</h2>
@@ -101,7 +101,7 @@ const Cart = () => {
                     </>
                 )
             }
-        </>
+        </div>
     )
 }
 
