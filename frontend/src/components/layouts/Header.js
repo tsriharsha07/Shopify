@@ -16,6 +16,8 @@ const Header = () => {
     const dispatch = useDispatch();
 
     const { user, loading } = useSelector(state => state.auth)
+    const { cartItems } = useSelector(state => state.cart)
+    console.log(cartItems);
 
     const logoutHandler = () => {
 
@@ -37,7 +39,7 @@ const Header = () => {
                 </div>
 
                 <div className="col-12 col-md-3 mt-4 mt-md-0 text-center">
-                    <Link to="/cart" style={{ textDecoration: "none" }}><Badge badgeContent={4} sx={{color:'orange'}}>
+                    <Link to="/cart" style={{ textDecoration: "none" }}><Badge badgeContent={cartItems && cartItems.length} sx={{color:'orange'}} >
                         <ShoppingCartTwoToneIcon sx={{color:'orange'}}/>
                     </Badge>
                     </Link>
