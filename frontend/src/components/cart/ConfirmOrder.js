@@ -24,7 +24,7 @@ const ConfirmOrder = () => {
         sessionStorage.setItem('orderInfo', JSON.stringify(data))
         navigate('/payment')
     }
-    console.log(shipping);
+    console.log(shipping,"Hi");
 
     return (
         <div className="container container-fluid">

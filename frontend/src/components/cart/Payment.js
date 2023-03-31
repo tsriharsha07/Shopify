@@ -82,7 +82,7 @@ const Payment = () => {
               }
             })
             if(result.error){
-            
+              console.log(result.error)
               alert.error(result.error.message);
               document.querySelector('#pay_btn').disabled=false;
             }
@@ -91,8 +91,9 @@ const Payment = () => {
               if(result.paymentIntent.status === 'succeeded'){
                 order.paymentInfo={
                   id:result.paymentIntent.id,
-                  status:result.paymentIntent.status
+                  status:result.paymentIntent.status 
                 }
+                console.log('Order request')
                 dispatch(createOrder(order))
                 navigate('/success')
               }

@@ -14,7 +14,7 @@ const OrderDetails = () => {
     const dispatch = useDispatch();
 
     const { loading, error, order = {} } = useSelector(state => state.orderDetails)
-    const { shippingInfo, orderItems, paymentInfo, user, totalPrice, orderStatus } = order
+    const { shipping, orderItems, paymentInfo, user, totalPrice, orderStatus } = order
     const params=useParams()
 
     useEffect(() => {
@@ -26,14 +26,13 @@ const OrderDetails = () => {
         }
     }, [dispatch, alert, error, params.id])
 
-    const shippingDetails = shippingInfo && `${shippingInfo.address}, ${shippingInfo.city}, ${shippingInfo.postalCode}, ${shippingInfo.country}`
+    const shippingDetails = shipping && `${shipping.address}, ${shipping.city}, ${shipping.postalCode}, ${shipping.country}`
 
     const isPaid = paymentInfo && paymentInfo.status === 'succeeded' ? true : false
 
     return (
         <div className="container container-fluid">
-            <MetaData title={'Order Details'} />
-
+            <MetaData title={'Order Details'} /> 
             {loading ? <Loader /> : (
                 <Fragment>
                     <div className="row d-flex justify-content-between">
@@ -43,7 +42,7 @@ const OrderDetails = () => {
 
                             <h4 className="mb-4">Shipping Info</h4>
                             <p><b>Name:</b> {user && user.name}</p>
-                            <p><b>Phone:</b> {shippingInfo && shippingInfo.phoneNo}</p>
+                            <p><b>Phone:</b> {shipping && shipping.phoneNo}</p>
                             <p className="mb-4"><b>Address:</b>{shippingDetails}</p>
                             <p><b>Amount:</b> ${totalPrice}</p>
 

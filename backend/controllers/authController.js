@@ -5,14 +5,11 @@ const catchAsyncErrors = require('../middlewares/catchAsyncErrors');
 const sendToken = require('../utils/jwtToken')
 const sendEmail = require('../utils/sendEmail')
 const crypto = require('crypto')
-
+ 
 //Register a user => /api/v1/user 
 
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
     const { name, email, password } = req.body;
-
-   
-
     const user = await User.create({
         name,
         email,
