@@ -3,13 +3,18 @@ import Sidebar from './Sidebar'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAdminProducts } from '../../actions/productActions'
-
+import { getAllUsers } from '../../actions/userActions'
+import { allOrders } from '../../actions/orderActions'
 
 const Dashboard = () => {
     const dispatch=useDispatch();
     const { products } =useSelector(state=>state.products)
+    const {orders,totalAmount,loading}=useSelector(state=>state.allOrders)
+    const {users}=useSelector(state=>state.allUsers)
     useEffect(()=>{
         dispatch(getAdminProducts())
+        dispatch(allOrders());
+        dispatch(getAllUsers());
     },[dispatch])
 
     let outOfStock=0;
@@ -30,7 +35,7 @@ const Dashboard = () => {
                                 <div className="col-xl-12 col-sm-12 mb-3">
                                     <div className="card text-white bg-primary o-hidden h-100">
                                         <div className="card-body">
-                                            <div className="text-center card-font-size">Total Amount<br /> <b>$4567</b>
+                                            <div className="text-center card-font-size">Total Amount<br /> <b>${totalAmount&& totalAmount}</b>
                                             </div>
                                         </div>
                                     </div>
@@ -56,7 +61,7 @@ const Dashboard = () => {
                                 <div className="col-xl-3 col-sm-6 mb-3">
                                     <div className="card text-white bg-danger o-hidden h-100">
                                         <div className="card-body">
-                                            <div className="text-center card-font-size">Orders<br /> <b>125</b></div>
+                                            <div className="text-center card-font-size">Orders<br /> <b>{orders&&orders.length>0&&orders.length}</b></div>
                                         </div>
                                         <Link className="card-footer text-white clearfix small z-1" to="/admin/orders">
                                             <span className="float-left">View Details</span>
@@ -71,7 +76,7 @@ const Dashboard = () => {
                                 <div className="col-xl-3 col-sm-6 mb-3">
                                     <div className="card text-white bg-info o-hidden h-100">
                                         <div className="card-body">
-                                            <div className="text-center card-font-size">Users<br /> <b>45</b></div>
+                                            <div className="text-center card-font-size">Users<br /> <b>{users&& users.length>0&& users.length}</b></div>
                                         </div>
                                         <Link className="card-footer text-white clearfix small z-1" href="/admin/users">
                                             <span className="float-left">View Details</span>

@@ -28,7 +28,7 @@ const Payment = () => {
     const navigate=useNavigate()
     const { user }= useSelector(state=>state.auth);
     const { cartItems,shipping} = useSelector(state=>state.cart)
-    const {  error } = useSelector(state=>state.order)
+    const {  error } = useSelector(state=>state.neworder)
     useEffect(()=>{
       if(error){
         alert.error(error)

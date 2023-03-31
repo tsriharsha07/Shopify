@@ -4,7 +4,7 @@ import {
     ADMIN_PRODUCTS_FAIL,
     ADMIN_PRODUCTS_REQUEST,
     ADMIN_PRODUCTS_SUCESS,
-    ALL_PRODUCTS_SUCESS,
+    ALL_PRODUCTS_SUCESS, 
     ALL_PRODUCTS_FAIL,
     PRODUCTS_DETAILS_FAIL,
     PRODUCTS_DETAILS_REQUEST,
@@ -22,7 +22,12 @@ import {
     UPDATE_PRODUCT_REQUEST,
     UPDATE_PRODUCT_SUCCESS,
     UPDATE_PRODUCT_FAIL,
-    UPDATE_PRODUCT_RESET,
+    GET_REVIEWS_FAIL,
+    GET_REVIEWS_REQUEST,
+    GET_REVIEWS_SUCCESS,
+    DELETE_REVIEW_REQUEST,
+    DELETE_REVIEW_SUCCESS,
+    DELETE_REVIEW_FAIL,
 } from '../constsants/productConstants'
 
 
@@ -35,7 +40,7 @@ export const getProducts = (keyword='',currentPage=1,price,category,rating)=>asy
         }
         
         const { data }=await axios.get(link)
-        
+        console.log(data);
         dispatch({
             type: ALL_PRODUCTS_SUCESS,
             payload: data
@@ -86,6 +91,25 @@ export const newReview = (reviewData) => async (dispatch)=>{
     catch(err){
         dispatch({
             type: NEW_REVIEW_FAIL,
+            payload: err.response
+        })
+    }
+}
+
+export const getProductReviews = (id) => async (dispatch)=>{
+    try{
+        dispatch({type:GET_REVIEWS_REQUEST})
+        
+        const { data }=await axios.get(`/api/v1/reviews?=${id}`)
+        
+        dispatch({
+            type: GET_REVIEWS_SUCCESS,
+            payload: data.reviews
+        })
+    }
+    catch(err){
+        dispatch({
+            type: GET_REVIEWS_FAIL,
             payload: err.response
         })
     }
@@ -171,6 +195,29 @@ export const getAdminProducts = () => async (dispatch)=>{
         dispatch({
             type: ADMIN_PRODUCTS_FAIL,
             payload: err.response
+        })
+    }
+}
+
+export const deleteReview = (id, productId) => async (dispatch) => {
+    try {
+
+        dispatch({ type: DELETE_REVIEW_REQUEST })
+
+        const { data } = await axios.delete(`/api/v1/reviews?id=${id}&productId=${productId}`)
+        
+        dispatch({
+            type: DELETE_REVIEW_SUCCESS,
+            payload: data.success
+        })
+
+    } catch (error) {
+
+        console.log(error.response);
+
+        dispatch({
+            type: DELETE_REVIEW_FAIL,
+            payload: error.response.data.message
         })
     }
 }
